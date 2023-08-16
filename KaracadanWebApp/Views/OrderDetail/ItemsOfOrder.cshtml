@@ -1,0 +1,59 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.OrderDetails
+@model OrderDetailViewModel;
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>Details</h3>
+        </div>
+
+    </div>
+    <!-- /.card-header -->
+    <div style="margin-top: 20px;
+                margin-left: 20px;">
+
+        <h4>Order No: @Model.OrderNo  </h4>
+        <h5>Order User Name: :@Model.OrderUser</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-head-fixed text-nowrap">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.orderDetails)
+             {
+                
+                    <tr>
+                        <td>
+                            <img src="@(item.Product.Image)" class="img-circle img-size-50 mr-5">
+                        </td>
+                        <td>@item.Product.Description</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.PriceProductOrderDetail</td>
+                        <td>@(item.PriceProductOrderDetail * item.Quantity)</td>
+                        <td>
+                            <a class="btn btn-success btn-sm" asp-controller="OrderDetail" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-success btn-sm" asp-controller="OrderDetail" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+
+                    </tr>
+               
+            }
+            </tbody>
+        </table>
+        <div class="card-footer">
+            <a class="btn btn-success btn-sm" asp-controller="Order" asp-action="Index" asp-route-id="Id" style="margin-left: 80%;">Back</a>
+        </div>
+        <!-- ./table -->
+    </div>
+    <!-- /.row -->
+</div>

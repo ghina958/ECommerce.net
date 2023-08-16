@@ -1,0 +1,41 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.Orders;
+@model MyOrdersViewModel;
+
+@{
+    Layout = "_Layout";
+}
+
+@foreach (var item in Model.allMyPervious)
+{
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <p> Order No: @item.No</p>
+                    <p>Order Date: @item.Date</p>
+                </div>
+            </div>
+            @foreach (var Detail in item.Details)
+            {
+                <div class="card-body row">
+
+                    <div class="col-6">
+                        <img src="@Detail.Product.Image" style="width: 30%; height: 90%;">
+
+                    </div>
+                    <div class="font-weight-bold col-6">
+                        <p>@Detail.Product.Name</p>
+                        <p>Quantity : @Detail.Quantity</p>
+                        <p>Price : @Detail.PriceProductOrderDetail</p>
+                    </div>
+                </div>
+            }
+            <div class="card-footer">
+                <h5 style="margin-left: 80%;">Total: @item.TheTotalPrice</h5>
+            </div>
+
+        </div>
+    </section>
+}
+

@@ -1,0 +1,123 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.Products
+@model ProductViewModel;
+
+<div class="row">
+   
+    <div class="col-12">
+        <form method="post" asp-action="Index" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </h3>
+                    <div class="card-tools">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <a href="/Product/Create" class="btn btn-bloks btn-success">Add</a>
+                        }                    
+                        <button type="button" class="btn btn-tool collapsed " data-card-widget="collapse">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display:block;">
+                    <div class="row">
+
+                        <div class="form-group col-6">
+                            <label asp-for="productSearchViewModel.Name">Name</label>
+                            <input asp-for="productSearchViewModel.Name" class="form-control" placeholder="Name Of Product">
+                            <span asp-validation-for="productSearchViewModel.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="productSearchViewModel.Description">Description</label>
+                            <input asp-for="productSearchViewModel.Description" class="form-control" placeholder="Enter Descriptionl">
+                            <span asp-validation-for="productSearchViewModel.Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="productSearchViewModel.Price">Price</label>
+                            <input asp-for="productSearchViewModel.Price" class="form-control" placeholder="Price">
+                            <span asp-validation-for="productSearchViewModel.Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="productSearchViewModel.ProductsStatus">Product Status</label>
+                            <select class="form-control" asp-for="productSearchViewModel.ProductsStatus" asp-items="@Html.GetEnumSelectList<ProductsStatus>()">
+                                <option selected>---all---</option>
+                            </select>
+                            <span asp-validation-for="productSearchViewModel.ProductsStatus" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="productSearchViewModel.CategoryId">Category Name</label>
+                            <select asp-for="productSearchViewModel.CategoryId" class="form-control" asp-items="@Model.productSearchViewModel.AvailableCategories">
+                                <option selected>---all---</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <div class="card-footer" style="display: block;">
+                    <button type="submit" class="btn btn-primary" style="margin-left: 80%;">
+                        <i class="fas fa-search" style='font-size:22px'></i>
+                    </button>
+                </div>          
+            </div>
+        </form>
+
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Our Products</h3>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Description</th>                          
+                            <th>Price</th>
+                            <th>ProductsStatus</th>
+                            <th>Category Name</th>
+                              @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                            {
+                                <th>Options</th>
+                            }
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.products)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="@item.Image" class="img-circle img-size-50 mr-5">
+                                </td>
+                               
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>                             
+                                <td>@item.Price$</td>
+                                <td>@item.ProductsStatus</td>
+                                <td>@item.Category.Name</td>
+                                <td>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                    {
+                                        <a class="btn btn-success btn-sm" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">
+                                            <i class='fas fa-edit'></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">
+                                            <i class=" fas fa-trash fa-lg"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

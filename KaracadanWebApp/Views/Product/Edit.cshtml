@@ -1,0 +1,47 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.Products;
+@model EditProductViewModel
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+  <input type="hidden" value="CategoryId" id="CategoryId" /> 
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Name Of Product">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Enter Descriptionl">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" class="form-control" placeholder="Price">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Price">Product Status</label>
+        <select class="form-control" asp-for="ProductsStatus" asp-items="@Html.GetEnumSelectList<ProductsStatus>()">
+            <option>---select---</option>
+        </select>
+        <span asp-validation-for="ProductsStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">Category Name</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="@Model.Categories">
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image">Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

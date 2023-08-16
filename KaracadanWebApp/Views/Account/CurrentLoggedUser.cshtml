@@ -1,0 +1,25 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.UsersAccountViewModel;
+@model CurrentLoggedUserViewModel;
+
+@{
+    Layout = "_Layout";
+}
+ 
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"> User Info </h3>
+
+
+    </div>
+    <div class="card-body">
+        <img src="#" alt="" style="width:100%">
+        <h2>First last Name:</h2>
+        <p>@Model.UserName</p>
+        <h5>Email :</h5>
+        <p>@Model.UserEmail</p>
+        <p><button>Edit</button></p>
+    </div>
+</div>
+
+

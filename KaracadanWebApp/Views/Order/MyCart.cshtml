@@ -1,0 +1,56 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.Orders;
+@model MyCartViewModel;
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-body">
+        <input type="hidden" value="CategoryId" id="CategoryId" />
+        <table class="table table-head-fixed text-nowrap">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>                 
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price </th>
+                    <th>Actions </th>
+
+                </tr>
+            </thead>
+            @foreach (var item in Model.Details)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td><img src="@item.Product.Image" class="img-circle img-size-50 mr-5"></td>
+                        <td>@item.Quantity </td>
+                        <td>@item.PriceProductOrderDetail </td>
+                        <td>@(@item.PriceProductOrderDetail * @item.Quantity) $</td>
+
+                        <td>
+                            <a class="btn btn-danger btn-sm" asp-controller="Order" asp-action="DeleteItemCart" asp-route-id="@item.Id">
+                                <i class=" fas fa-trash fa-lg"></i>
+                            </a>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            }
+            <tfoot>
+
+                <h4>Order No: @(Model.No == 0 ? "No Items" : Model.No.ToString())</h4>
+                <h4>Order Date: @(Model.Date == null ? "No Date yet" : Model.Date) </h4>
+                <h4>Total: @Model.TheTotalPrice $</h4>
+
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<a type="submit" class="btn btn-primary" asp-controller="Order" asp-action="SubmittingButtonForOrder"> Submit </a>
+

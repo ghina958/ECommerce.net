@@ -1,0 +1,92 @@
+﻿@using KaracadanWebApp.Data;
+@model Product
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+        Are you sure to delete this product ?
+
+        </h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body" style="display: block;">
+       
+
+            <form method ="post" asp-action="Delete" enctype="multipart/form-data">
+                <input type="hidden" value="CategoryId" id="CategoryId" />             
+                        <div class="col-6">
+                            <p>@Model.Name</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width:50%">Description:</th>
+                                            <td>@Model.Description</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Price:</th>
+                                            <td>@Model.Price</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Product Status:</th>
+                                            <td>@Model.ProductsStatus</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Category Name:</th>
+                                            <td>@Model.Category.Name</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <button class="btn btn-danger float-right mt-3" type="submit" value="Confirm">
+                           Confirm
+                    </button>              
+            </form>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+@*<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <input type="hidden" value="CategoryId" id="CategoryId" />
+    
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Name Of Product">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Enter Descriptionl">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" class="form-control" placeholder="Price">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Price">Product Status</label>
+        <select class="form-control" asp-for="ProductsStatus">
+            <option>---select---</option>
+        </select>
+        <span asp-validation-for="ProductsStatus" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Category.Name">Category Name</label>
+        <input asp-for="Category.Name" class="form-control" placeholder="Category Name">
+        <span asp-validation-for="Category.Name" class="text-danger"></span>
+    </div>
+
+
+    <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+</form>*@
+

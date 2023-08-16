@@ -1,0 +1,79 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.ViewModels.Customers
+@model CustomerViewModel;
+
+<div class="row">
+    <div class="col-12">
+        <form method="post" asp-action="Index" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool collapsed " data-card-widget="collapse">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display: block;">
+                    <div class="row">
+
+                        <div class="form-group col-6">
+                            <label asp-for="CustomerSearchViewModel.UserName">Order No:</label>
+                            <input asp-for="CustomerSearchViewModel.UserName" class="form-control" placeholder="Users Name">
+                            <span asp-validation-for="CustomerSearchViewModel.UserName" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <div class="card-footer" style="display:block;">
+                    <button type="submit" class="btn btn-primary" style="margin-left: 80%;">
+                        <i class="fas fa-search" style='font-size:22px'></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                        <tr>
+                            
+                            <th>Customer Name</th>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <th>Options</th>
+                        }
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.Users)
+                    {
+                        <tbody>
+                            <tr>                               
+                                <td>@item.UserName</td>
+                                <td>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                    {
+                                        <a class="btn btn-success btn-sm" asp-controller="Customer" asp-action="Edit" asp-route-id="@item.Id">
+                                            <i class='fas fa-edit'></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" asp-controller="Customer" asp-action="Delete" asp-route-id="@item.Id">
+                                            <i class=" fas fa-trash fa-lg"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

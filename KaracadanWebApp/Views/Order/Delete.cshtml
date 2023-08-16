@@ -1,0 +1,32 @@
+﻿@model Order
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            Are you sure to delete this Order ?
+
+        </h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body" style="display: block;">
+
+
+        <form method="post" asp-action="Delete" enctype="multipart/form-data">
+            @* <input type="hidden" value="CategoryId" id="CategoryId" />*@
+            <div class="col-6">             
+                <p style="width:50%">Order No:  @Model.No</p>
+                <p>Order Date:  @Model.Date </p>
+                <p>Customer Name:  @Model.ApplicationUser.NormalizedUserName </p>
+            </div>
+
+            <br>
+
+            <button class="btn btn-danger float-right mt-3" type="submit" value="Confirm">
+                Confirm
+            </button>
+        </form>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+</div>

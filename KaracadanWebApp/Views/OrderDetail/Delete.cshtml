@@ -1,0 +1,34 @@
+﻿@model OrderDetail
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            Are you sure to delete this Order ?
+
+        </h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body" style="display: block;">
+        <form method="post" asp-action="Delete" enctype="multipart/form-data">
+            <input type="hidden" asp-for="OrderId" />
+            <input type="hidden" asp-for="ProductId" />
+
+
+            <div class="col-6">
+                <p>Order No : @Model.Order.No </p>
+                <p>Order Customer : @Model.Order.ApplicationUser.UserName </p>
+                <p>Product Name : @Model.Product.Name </p>
+                <p>Quantity : @Model.Quantity </p>
+                <p>Price : @Model.PriceProductOrderDetail </p>              
+            </div>
+
+            <button class="btn btn-danger float-right mt-3" type="submit" value="Confirm">
+                Confirm
+            </button>
+        </form>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+</div>

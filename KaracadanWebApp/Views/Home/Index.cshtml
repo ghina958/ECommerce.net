@@ -1,0 +1,82 @@
+﻿@using KaracadanWebApp.Data;
+@using KaracadanWebApp.Interfaces;
+@using KaracadanWebApp.ViewModels.Products
+@model ProductViewModel;
+
+@{
+    ViewData["Title"] = "AnaSayfa";
+    Layout = "_Layout";
+}
+
+<section class="content" style="padding: 20px .5rem;">
+    <div class="row">
+        @foreach (var item in Model.products)
+        {
+            <div class="col-md-4 col-sm-4">
+                <div class="card card-solid">
+                    <div class="card-body">
+                        <div class="row" >
+                            <div class="col-12 col-sm-6">
+                                <h3 class="d-inline-block d-sm-none">@item.Name</h3>
+                                <div class="col-12">
+
+                                    <img src="@(item.Image)" class="product-image" alt="Product Image" style="height: 180px;">
+                                </div>
+                                
+                            </div>
+                            <div class="col-12 col-sm-6">
+
+
+                                <p style="text-overflow: ellipsis;
+                                 overflow: hidden;
+                                 white-space: nowrap;"> @item.Description.</p>
+                                   
+                                 <hr>
+                                <div class="m-2">
+                                <div class="bg-gray py-1 px-3 mt-2" style="padding-left: 1rem!important; margin-left: 20px; margin-right: 20px;">
+                                    <div style="text-align :center">
+                                        <h3 class="mb-0">
+                                            @item.Price$
+
+                                        </h3>
+                                        <h5 class="mt-0">
+                                            <small>@item.ProductsStatus </small>
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                @if (item.StatusId == 2)
+                                {
+                                        <div class="mt-4 Disabled" style="margin-top: 0.5rem!important; margin-left: 60px;">
+                                        <a class="btn btn-primary btn-lg btn-flat" style="pointer-events: none;"
+                                           asp-controller="Order" asp-action="AddItemCart" asp-route-id="@item.Id">
+                                            <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                        </a>
+                                    </div>
+
+
+
+                                }
+                                else
+                                {
+                                        <div class="mt-4" style="margin-top: 0.5rem!important; margin-left: 60px;">
+                                        <a class="btn btn-primary btn-lg btn-flat" asp-controller="Order" asp-action="AddItemCart" asp-route-id="@item.Id">
+                                            <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                      
+                                        </a>
+                                    </div>
+                                }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    }

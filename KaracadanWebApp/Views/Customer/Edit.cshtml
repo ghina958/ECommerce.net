@@ -1,0 +1,15 @@
+﻿@using KaracadanWebApp.Data
+@using KaracadanWebApp.ViewModels.Customers;
+@model EditCustomerViewModel
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    @* <input type="hidden" id="AppUser" name="AppUser" asp-for="AppUserId" />*@ @*will supply values that are returned from the server*@
+
+    <div class="form-group">
+        <label asp-for="CustomerName">Customer Name</label>
+        <input asp-for="CustomerName" class="form-control" placeholder="Customer Name">
+        <span asp-validation-for="CustomerName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

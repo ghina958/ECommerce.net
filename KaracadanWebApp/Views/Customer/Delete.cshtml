@@ -1,0 +1,26 @@
+﻿@model ApplicationUser
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            Are you sure to delete this User ?
+
+        </h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body" style="display: block;">
+        <form method="post" asp-action="Delete" enctype="multipart/form-data">
+            <div class="col-6">
+                <p>Name : @Model.UserName </p>
+            </div>
+
+            <button class="btn btn-danger float-right mt-3" type="submit" value="Confirm">
+                Confirm
+            </button>
+        </form>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+</div>
