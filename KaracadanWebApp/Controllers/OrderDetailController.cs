@@ -78,7 +78,7 @@ namespace KaracadanWebApp.Controllers
                 ProductId = OrderItem.ProductId,
                 OrderId = OrderItem.OrderId     
             };
-            return View(detailVM);
+            return View(detailVM); 
         }
 
         [HttpPost]
